@@ -41,8 +41,6 @@ function formatearUptime(segundos) {
   return dias + 'd ' + horas + 'h ' + minutos + 'm';
 }
 
-// PROGRAMACION ORIENTADA A OBJETOS
-
 class MonitorSistema {
 
   async obtenerSO() {
@@ -198,8 +196,6 @@ class MonitorSistema {
     };
   }
 
-  // MANEJO DE ERRORES Y REINTENTOS
-
   async leerConReintentos() {
     let intentos = 0;
     let datos = null;
@@ -221,8 +217,6 @@ class MonitorSistema {
   }
 }
 
-// INSTANCIAS Y CONFIGURACION
-
 const monitor = new MonitorSistema();
 const app = express();
 const servidorHttp = http.createServer(app);
@@ -236,8 +230,6 @@ app.use(express.json());
 
 const rutaPublic = path.join(__dirname, '..', 'frontend', 'public');
 app.use(express.static(rutaPublic));
-
-// API PRINCIPAL
 
 app.get('/api/sistema', async function (req, res) {
   try {
@@ -254,8 +246,6 @@ app.get('/api/sistema', async function (req, res) {
     res.status(500).json({ error: 'Error interno del monitor' });
   }
 });
-
-// RUTAS SECUNDARIAS
 
 app.get('/api/so', async function (req, res) {
   try {
@@ -302,8 +292,6 @@ app.get('/api/red', async function (req, res) {
   }
 });
 
-// SOCKET.IO
-
 io.on('connection', async function (socket) {
   console.log('Cliente conectado: ' + socket.id);
 
@@ -325,8 +313,6 @@ io.on('connection', async function (socket) {
     console.log('Cliente desconectado: ' + socket.id);
   });
 });
-
-// ACTUALIZACION EN TIEMPO REAL
 
 setInterval(async function () {
   if (io.engine.clientsCount === 0 || leyendo === true) {
@@ -352,8 +338,6 @@ setInterval(async function () {
   leyendo = false;
 
 }, INTERVALO_MS);
-
-// INICIAR SERVIDOR
 
 servidorHttp.listen(PUERTO, '0.0.0.0', function () {
   console.log(NOMBRE_APP + ' escuchando en puerto ' + PUERTO);
