@@ -1,4 +1,4 @@
-# Monitor de Recursos GNU/Linux
+# Monitor de Recursos
 
 ## Trabajo Práctico Final Integrador
 
