@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         actualizarTexto("cpu-uso", datos.uso);
         actualizarTexto("cpu-modelo", datos.modelo);
-        actualizarTexto("cpu-nucleos", datos.nucleos);
+        actualizarTexto("cpu-nucleos", datos.nucleosLogicos);
 
         actualizarBarra("cpu-barra", datos.uso);
 
@@ -77,8 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function mostrarRAM(datos) {
 
         actualizarTexto("ram-uso", datos.uso);
-        actualizarTexto("ram-total", datos.total);
-        actualizarTexto("ram-libre", datos.libre);
+        actualizarTexto("ram-total", datos.totalGB);
+        actualizarTexto("ram-libre", datos.libreGB);
 
         actualizarBarra("ram-barra", datos.uso);
 
@@ -99,10 +99,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 let parrafo = document.createElement("p");
 
+                
                 parrafo.textContent =
-                    "Unidad: " + disco.unidad +
-                    " | Total: " + disco.total + " GB" +
-                    " | Disponible: " + disco.libre + " GB";
+                    "Unidad: " + disco.punto +
+                    " | Total: " + disco.totalGB + " GB" +
+                    " | Disponible: " + disco.libreGB + " GB";
+
 
                 lista.appendChild(parrafo);
 
@@ -113,7 +115,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // Función para mostrar las interfaces de red
+    
+    // Función para mostrar la información de red
     function mostrarRed(datos) {
 
         let lista = document.getElementById("red-lista");
@@ -122,30 +125,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
             lista.textContent = "";
 
-            for (let i = 0; i < datos.length; i++) {
+            let parrafo = document.createElement("p");
 
-                let interfaz = datos[i];
+            parrafo.textContent =
+                "Interfaz: " + datos.interfaz +
+                " | IP: " + datos.ip +
+                " | MAC: " + datos.mac +
+                " | Velocidad: " + datos.velocidadMbps + " Mbps";
 
-                let parrafo = document.createElement("p");
-
-                parrafo.textContent =
-                    "Interfaz: " + interfaz.nombre +
-                    " | IP: " + interfaz.ip +
-                    " | Estado: " + interfaz.estado;
-
-                lista.appendChild(parrafo);
-
-            }
+            lista.appendChild(parrafo);
 
         }
 
     }
 
+
+    
+
     
     // Función para mostrar los datos del sistema operativo
     function mostrarSistemaOperativo(datos) {
 
-        actualizarTexto("so-nombre", datos.nombre);
+        actualizarTexto("so-nombre", datos.distribucion);
         actualizarTexto("so-version", datos.version);
         actualizarTexto("so-arquitectura", datos.arquitectura);
         actualizarTexto("so-hostname", datos.hostname);
@@ -154,16 +155,36 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    
     // Función para mostrar los datos de memoria SWAP
     function mostrarSWAP(datos) {
 
-        actualizarTexto("swap-uso", datos.uso + "%");
-        actualizarTexto("swap-total", datos.total);
-        actualizarTexto("swap-libre", datos.libre);
+        let total = datos.swapTotalGB;
+        let usada = datos.swapUsadaGB;
+        let libre = total - usada;
+        let uso = 0;
 
-        actualizarBarra("swap-barra", datos.uso);
+        // Calcular el porcentaje de uso
+        if (total > 0) {
+            uso = Number(((usada / total) * 100).toFixed(1));
+        }
+
+        // Evitar valores negativos
+        if (libre < 0) {
+            libre = 0;
+        }
+
+        libre = Number(libre.toFixed(2));
+
+        // Actualizar la tarjeta
+        actualizarTexto("swap-uso", uso + "%");
+        actualizarTexto("swap-total", total);
+        actualizarTexto("swap-libre", libre);
+
+        actualizarBarra("swap-barra", uso);
 
     }
+
 
 
     // Función para mostrar el estado de conexión
@@ -231,6 +252,21 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             console.log("Error de conexión: " + error.message);
+
+        });
+
+        
+        // Recibir las métricas enviadas por el backend
+        socket.on("sistema", function (datos) {
+
+            mostrarCPU(datos.cpu);
+            mostrarRAM(datos.memoria);
+            mostrarSWAP(datos.memoria);
+            mostrarDiscos(datos.discos);
+            mostrarRed(datos.red);
+            mostrarSistemaOperativo(datos.sistema);
+
+            console.log("Métricas del servidor recibidas");
 
         });
 
