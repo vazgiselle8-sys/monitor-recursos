@@ -121,6 +121,49 @@
     </div>
 </div>
 
+<!-- Tarjeta de Sistema Operativo -->
+<div class="col-md-6">
+    <div class="card shadow-sm h-100">
+        <div class="card-body">
+            <h3 class="card-title">Sistema Operativo</h3>
+
+            <p>Información general del sistema GNU/Linux.</p>
+
+            <p>Nombre: <span id="so-nombre">Cargando...</span></p>
+            <p>Versión: <span id="so-version">-</span></p>
+            <p>Arquitectura: <span id="so-arquitectura">-</span></p>
+            <p>Hostname: <span id="so-hostname">-</span></p>
+            <p>Tiempo encendido: <span id="so-uptime">-</span></p>
+
+        </div>
+    </div>
+</div>
+
+<!-- Tarjeta de Memoria SWAP -->
+<div class="col-md-6">
+    <div class="card shadow-sm h-100">
+        <div class="card-body">
+            <h3 class="card-title">Memoria SWAP</h3>
+
+            <p>Uso de memoria de intercambio del sistema.</p>
+
+            <p>Uso actual: <span id="swap-uso">0%</span></p>
+
+            <div class="progress mb-3">
+                <div
+                    id="swap-barra"
+                    class="progress-bar bg-warning"
+                    style="width: 0%">
+                </div>
+            </div>
+
+            <p>Total: <span id="swap-total">-</span> GB</p>
+            <p>Disponible: <span id="swap-libre">-</span> GB</p>
+
+        </div>
+    </div>
+</div>
+
 </div>
 
     </main>
