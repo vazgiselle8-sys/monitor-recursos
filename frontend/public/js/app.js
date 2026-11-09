@@ -41,4 +41,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+    // Función para actualizar las barras de progreso
+    function actualizarBarra(id, porcentaje) {
+
+        let barra = document.getElementById(id);
+
+        if (barra !== null) {
+
+            if (porcentaje < 0) {
+                porcentaje = 0;
+            }
+
+            if (porcentaje > 100) {
+                porcentaje = 100;
+            }
+
+            barra.style.width = porcentaje + "%";
+
+        }
+
+    }
+
+
 });
