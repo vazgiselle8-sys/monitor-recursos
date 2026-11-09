@@ -166,6 +166,76 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // Función para mostrar el estado de conexión
+    function actualizarEstadoConexion(mensaje, tipo) {
+
+        let estado = document.getElementById("estado-conexion");
+
+        if (estado !== null) {
+            estado.textContent = "Estado del servidor: " + mensaje;
+            estado.className = "alert py-2 " + tipo;
+        }
+
+    }
+
+    // Comprobar si Socket.IO está disponible
+    if (typeof io === "undefined") {
+
+        actualizarEstadoConexion(
+            "Socket.IO todavía no está disponible",
+            "alert-warning"
+        );
+
+    }
+
+    // Conectar con el servidor mediante Socket.IO
+    if (typeof io !== "undefined") {
+
+        let socket = io();
+
+        actualizarEstadoConexion(
+            "Conectando...",
+            "alert-warning"
+        );
+
+        // Cuando se establece la conexión
+        socket.on("connect", function () {
+
+            actualizarEstadoConexion(
+                "Conectado",
+                "alert-success"
+            );
+
+            console.log("Conexión con el servidor establecida");
+
+        });
+
+        // Cuando se pierde la conexión
+        socket.on("disconnect", function () {
+
+            actualizarEstadoConexion(
+                "Desconectado",
+                "alert-danger"
+            );
+
+            console.log("Conexión con el servidor perdida");
+
+        });
+
+        // Cuando ocurre un error de conexión
+        socket.on("connect_error", function (error) {
+
+            actualizarEstadoConexion(
+                "Error de conexión",
+                "alert-danger"
+            );
+
+            console.log("Error de conexión: " + error.message);
+
+        });
+
+    }
+
     
 
 
