@@ -1,0 +1,27 @@
+
+/* Estilos generales del panel de monitoreo */
+
+body {
+    background-color: #f4f6fa;
+    font-family: Arial, sans-serif;
+}
+
+/* Diseño de las tarjetas */
+
+.card {
+    border: 1px solid #dce3eb;
+    border-radius: 12px;
+}
+
+/* Títulos de las tarjetas */
+
+.card-title {
+    color: #1d4f91;
+    font-weight: bold;
+}
+
+/* Espaciado interno */
+
+.card-body {
+    padding: 20px;
+}
