@@ -101,16 +101,14 @@ En las pruebas se utilizó VirtualBox y Visual Studio Code con Remote-SSH. No so
 
 Desde una terminal de Debian:
 
-bash
+```bash
 git clone https://github.com/vazgiselle8-sys/monitor-recursos.git
 cd monitor-recursos
 
-# Utilizar la versión que se integró y probó
-git switch --track origin/integracion-pruebas
 
 cd backend
 pnpm install --frozen-lockfile
-
+```
 La instalación se verificó con el archivo `pnpm-lock.yaml` y las dependencias registradas en `package.json`.
 
 
@@ -129,10 +127,13 @@ En el código revisado se permite CORS para las conexiones del servidor. Para un
 
 ## Ejecución del proyecto
 
-Desde la carpeta backend:
 
-#bash
+Desde la carpeta `backend`:
+
+```bash
 pnpm start
+```
+
 
 - El comando ejecuta "node server.js". Si inicia correctamente, el servidor informa que está escuchando en el puerto 3000.
 - Abrir desde el equipo propio:   http://localhost:3000
@@ -163,7 +164,7 @@ El backend permite consultar los recursos también mediante HTTP, independientem
 | GET    | /api/discos  | Arreglo de particiones y capacidades. |
 | GET    | /api/red     | Interfaz principal, IP, MAC y velocidad. |
 
-Ejemplo de consulta:   http://localhost:3000/api/sistem
+Ejemplo de consulta: `http://localhost:3000/api/sistema`
 
 La respuesta principal incluye sistema, cpu, memoria, discos y red. El navegador puede mostrar el JSON directamente, sin instalar herramientas adicionales.
 
@@ -194,17 +195,21 @@ La comunicación es bidireccional: cliente y servidor pueden emitir y escuchar e
 
 - El servidor envía las métricas a un cliente al conectarse:
 
-javascript
+```javascript
 socket.emit("sistema", datos);
+```
+
 
 - Además, envía actualizaciones a los clientes conectados:
 
-javascript
+```javascript
 io.emit("sistema", datos);
+```
+
 
 - El frontend escucha el mismo evento:
 
-javascript
+```javascript
 socket.on("sistema", function (datos) {
     mostrarCPU(datos.cpu);
     mostrarRAM(datos.memoria);
@@ -213,6 +218,8 @@ socket.on("sistema", function (datos) {
     mostrarRed(datos.red);
     mostrarSistemaOperativo(datos.sistema);
 });
+```
+
 
 - Las funciones actualizan los textos y las barras utilizando el DOM. RAM y SWAP comparten el objeto "datos.memoria".
 
@@ -220,8 +227,10 @@ socket.on("sistema", function (datos) {
 
 Cuando un navegador establece conexión, Socket.IO le asigna un identificador de conexión, disponible como "socket.id". El servidor lo muestra en la consola mediante:
 
-Javascript
+```javascript
 console.log("Cliente conectado: " + socket.id);
+```
+
 
 Ese identificador permite distinguir conexiones activas, pero **no representa una cuenta ni una autenticación de usuario**. Puede cambiar después de desconectarse y volver a conectarse. Este monitor no implementa registro ni inicio de sesión.
 
@@ -233,21 +242,58 @@ Los valores de las tarjetas permanecen visibles durante una desconexión, pero s
 
 ## Capturas de pantalla
 
-Durante el desarrollo se obtuvieron capturas de las pruebas. 
+Durante el desarrollo se registraron evidencias del
+funcionamiento del Monitor de Recursos GNU/Linux.
 
-Se alojaron en "docs/img/" imágenes de:
+### Dashboard del sistema
 
-- Panel completo conectado, con las seis tarjetas y métricas reales.
-- Consola del navegador con recepciones repetidas de `sistema`.
-- Indicador rojo durante la desconexión.
-- Reconexión automática con indicador verde.
-- Respuesta JSON de "/api/sistema" y rutas individuales.
-- Ramas, historial de commits y colaboración en GitHub.
+Se verificó el funcionamiento del frontend con el tema
+oscuro profesional, las seis tarjetas de monitoreo
+y el servidor conectado.
 
-Cuando estén copiadas al repositorio, se podrán insertar así, usando el nombre real de cada archivo:
+![Dashboard del sistema](docs/capturas/dashboard-oscuro.png)
 
+### API REST
 
-## Pruebas realizadas
+Se consultó la ruta `/api/so` para comprobar que
+el backend obtiene información real de Debian 13.
+
+![Respuesta de la API REST](docs/capturas/api-rest-sistema-operativo.png)
+
+### Servicio systemd
+
+Se comprobó que `monitor-recursos.service` está
+habilitado y en ejecución en Debian 13.
+
+![Estado del servicio systemd](docs/capturas/servicio-systemd.png)
+
+### Evidencias adicionales
+
+Las capturas realizadas durante el desarrollo del
+backend se encuentran en la carpeta
+`docs/capturas del backend/`.
+
+La documentación detallada también está disponible en:
+
+- [Documentación del frontend](docs/frontend.md)
+- [Documentación del backend](docs/backend.md)
+- [Diagrama de arquitectura](docs/arquitectura.md)
+- [Diagrama de comunicación](docs/comunicacion.md)
+
+## Gráfico de utilización de recursos
+
+El siguiente gráfico muestra valores observados
+en una captura del dashboard de Debian 13.
+Es una representación de ejemplo, no una medición en vivo.
+
+```mermaid
+xychart-beta
+    title "Uso de recursos del servidor"
+    x-axis ["CPU", "RAM", "SWAP"]
+    y-axis "Porcentaje" 0 --> 100
+    bar [23.3, 34, 0]
+```
+Pruebas realizadas
 
 | Prueba                         | Resultado observado                                         | Estado  |
 |--------------------------------|-------------------------------------------------------------|---------|
@@ -268,6 +314,39 @@ Cuando estén copiadas al repositorio, se podrán insertar así, usando el nombr
 | Integrar ramas de Git          | Fusión sin conflictos en "integracion-pruebas".             | OK |
 | Publicar integración en GitHub | Rama remota e historial de ambas estudiantes visibles.      | OK |
 
+
+## GitHub Helpers: GitDiagram
+
+Durante el desarrollo del proyecto se utilizó
+GitDiagram, una herramienta que permite generar
+diagramas de arquitectura a partir de repositorios
+de GitHub.
+
+Se analizó el repositorio Monitor de Recursos GNU/Linux:
+
+https://github.com/vazgiselle8-sys/monitor-recursos
+
+GitDiagram generó una representación visual que
+permite identificar los componentes principales:
+
+- Frontend desarrollado con HTML, CSS y JavaScript.
+- Backend desarrollado con Node.js y Express.
+- API REST para consultar información del sistema.
+- Socket.IO para las actualizaciones en tiempo real.
+- systeminformation para obtener recursos de Debian 13.
+
+El resultado se incorporó a la documentación
+como complemento del diagrama Mermaid.
+
+### Diagrama generado con GitDiagram
+
+![Diagrama generado con GitDiagram](docs/capturas/diagrama-gitdiagram.png)
+
+Documentación complementaria:
+
+[Ver diagramas de arquitectura](docs/arquitectura.md)
+
+Herramienta utilizada: https://gitdiagram.com/
 
 ## Problemas conocidos y limitaciones
 
