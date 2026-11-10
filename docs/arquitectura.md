@@ -44,3 +44,25 @@ donde se ejecuta.
 La integración del código se realizó mediante Git,
 sin requerir que las máquinas virtuales estén
 conectadas a la misma red.
+
+## 3. Arquitectura generada con GitDiagram
+
+Como parte de las herramientas GitHub Helpers,
+se utilizó GitDiagram para analizar el repositorio
+del proyecto Monitor de Recursos GNU/Linux.
+
+Esta herramienta permitió generar automáticamente
+una representación visual de los componentes
+principales del sistema y sus relaciones.
+
+El diagrama muestra la comunicación entre el
+frontend, el backend Node.js, la API REST,
+Socket.IO y la biblioteca systeminformation,
+encargada de consultar los recursos de Debian 13.
+
+Esta representación complementa el diagrama Mermaid
+elaborado anteriormente.
+
+**Figura 1. Diagrama de arquitectura generado con GitDiagram.**
+
+![Arquitectura del proyecto generada con GitDiagram](capturas/diagrama-gitdiagram.png)
