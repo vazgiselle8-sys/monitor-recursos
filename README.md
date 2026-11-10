@@ -16,6 +16,7 @@ El backend obtiene las métricas del servidor donde se esta ejecutando. El front
 - main: versión principal del proyecto.
 - rama-backend: desarrollo del backend.
 - rama-frontend: desarrollo del frontend.
+- integracion-pruebas: donde se integran ambas ramas.
   
 ## Tecnologías
 #Frontend:
