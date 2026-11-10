@@ -105,8 +105,6 @@ Desde una terminal de Debian:
 git clone https://github.com/vazgiselle8-sys/monitor-recursos.git
 cd monitor-recursos
 
-# Utilizar la versión que se integró y probó
-git switch --track origin/integracion-pruebas
 
 cd backend
 pnpm install --frozen-lockfile
