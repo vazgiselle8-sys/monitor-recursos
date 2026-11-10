@@ -1,0 +1,154 @@
+
+/* Estilos generales del monitor */
+body {
+    background-color: #f4f6fa;
+    font-family: Arial, sans-serif;
+}
+
+/* Encabezado del dashboard */
+.dashboard-header {
+    background-color: #10234d;
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.dashboard-header h1 {
+    font-weight: bold;
+}
+
+/* Tarjetas del monitor */
+.card {
+    border: 1px solid #dce3eb;
+    border-radius: 12px;
+}
+
+.card-title {
+    color: #1d4f91;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Pie de pagina */
+.pie-pagina {
+    margin-top: 40px;
+    padding: 25px 15px;
+    text-align: center;
+    background-color: #0f172a;
+    color: #cbd5e1;
+}
+
+.pie-pagina p {
+    margin: 0 0 5px;
+    font-weight: 600;
+}
+
+.pie-pagina span {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* Adaptacion para celulares */
+@media (max-width: 576px) {
+
+    .dashboard-header {
+        padding: 25px 15px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+}
+
+/* ======================================
+   ====================================== */
+
+/* Fondo y textos generales */
+body {
+    background-color: #151b28;
+    color: #e8eef8;
+}
+
+/* Encabezado */
+.dashboard-header {
+    background-color: #202e44;
+    color: #ffffff;
+    border: 1px solid #3b4b63;
+}
+
+/* Titulo principal */
+main h2 {
+    color: #ffffff;
+}
+
+/* Tarjetas */
+.card {
+    background-color: #263248;
+    color: #e8eef8;
+    border: 1px solid #3b4b63;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.20);
+}
+
+/* Titulos de tarjetas */
+.card-title {
+    color: #c0d8ff;
+}
+
+/* Barras de progreso */
+.progress {
+    background-color: #131e2e;
+}
+
+/* Barra CPU */
+.progress-bar.bg-primary {
+    background-color: #60a5fa !important;
+}
+
+/* Barra RAM */
+.progress-bar.bg-success {
+    background-color: #34d399 !important;
+}
+
+/* Barra SWAP */
+.progress-bar.bg-warning {
+    background-color: #fbbf24 !important;
+}
+
+/* Estado: conectado */
+.alert-success {
+    background-color: #173c32;
+    color: #b9f6d3;
+    border-color: #24664e;
+}
+
+/* Estado: pendiente */
+.alert-secondary {
+    background-color: #283449;
+    color: #dce5f5;
+    border-color: #43536d;
+}
+
+/* Estado: desconectado */
+.alert-danger {
+    background-color: #4b222b;
+    color: #ffd0d5;
+    border-color: #934050;
+}
+
+/* Pie de pagina */
+.pie-pagina {
+    background-color: #101622;
+    color: #cbd5e1;
+}
