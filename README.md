@@ -297,7 +297,7 @@ Ramas de trabajo:
 - main: rama principal.
 - rama-backend: desarrollo individual del backend.
 - rama-frontend: desarrollo individual del frontend.
-- rama-prueba: 
+- integracion-pruebas: donde se realizo la integración de ambas ramas. 
 
 ##  Licencia y finalidad educativa
 
