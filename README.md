@@ -275,12 +275,11 @@ Cuando estén copiadas al repositorio, se podrán insertar así, usando el nombr
 - Si se interrumpe la comunicación, permanecen en pantalla los últimos valores recibidos.
 - El cálculo de uso de SWAP en el frontend se realiza con cifras de GB redondeadas; puede ser aproximado.
 - Actualmente no existe autenticación de usuarios.
+- La aplicación móvil no recibe las métricas. 
 
 ## Mejoras futuras y actividades pendientes
 
-- Completar el tablero de GitHub Projects/Kanban y sus evidencias.
-- Preparar y probar la versión móvil solicitada en el trabajo.
-- Configurar y probar el inicio automático del servidor mediante `systemd`.
+- Mejorar la aplicación móvil.
 - Mejorar la visualización de métricas, agregando fecha/hora de la última actualización y avisos de datos desactualizados.
 - Evaluar seguridad de acceso y restricción de CORS en un despliegue real.
 - Implementar autenticación.
@@ -308,7 +307,7 @@ Proyecto desarrollado con fines educativos para un Trabajo Práctico Final Integ
 
 El TP Final Integrador permitió aplicar de manera conjunta los contenidos de HTML, CSS, Bootstrap, JavaScript, Node.js, objetos JSON, funciones, arreglos, condicionales, ciclos, API REST, Socket.IO, Git y GitHub.
 
-A la hora de la integración fue necesario adaptar los nombres de las propiedades enviadas por el backend, corregir llaves en JavaScript y varias veces comprobar la comunicación entre las partes. Las pruebas de conexión, desconexión, reconexión y consulta HTTP permitieron verificar el comportamiento real de la aplicación.
+A la hora de la integración fue necesario adaptar los nombres de las propiedades enviadas por el backend, corregir llaves en JavaScript y varias veces comprobar la comunicación entre las partes. Las pruebas de conexión, desconexión, reconexión y consulta HTTP permitieron verificar el comportamiento real de la aplicación. No se logro recibir las métricas desde la aplicación movil.
 
 El resultado es un monitor web que presenta métricas de un servidor Debian 13 y las actualiza automáticamente. 
 
