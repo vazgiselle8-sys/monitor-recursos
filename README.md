@@ -210,8 +210,106 @@ socket.on("sistema", function (datos) {
 
 - Las funciones actualizan los textos y las barras utilizando el DOM. RAM y SWAP comparten el objeto "datos.memoria".
 
+## Identificación de conexiones con "socket.id"
+
+Cuando un navegador establece conexión, Socket.IO le asigna un identificador de conexión, disponible como "socket.id". El servidor lo muestra en la consola mediante:
+
+Javascript
+console.log("Cliente conectado: " + socket.id);
+
+Ese identificador permite distinguir conexiones activas, pero **no representa una cuenta ni una autenticación de usuario**. Puede cambiar después de desconectarse y volver a conectarse. Este monitor no implementa registro ni inicio de sesión.
+
+## Desconexión y reconexión
+
+El frontend escucha los eventos "disconnect" y "connect_error" para mostrar el estado del servidor. Si el backend se detiene, el indicador pasa de verde a rojo. Cuando Node.js vuelve a iniciar, Socket.IO puede restablecer la conexión y reanudar las actualizaciones.
+En la prueba realizada se detuvo Node.js con "Ctrl + C" y se volvió a iniciar con "pnpm start", **sin recargar la página**. Se observaron la pérdida de conexión, el error de conexión y la posterior reconexión.
+Los valores de las tarjetas permanecen visibles durante una desconexión, pero son los **últimos datos recibidos** y no deben interpretarse como mediciones actualizadas.
+
+## Capturas de pantalla
+
+Durante el desarrollo se obtuvieron capturas de las pruebas. 
+
+Se alojaron en "docs/img/" imágenes de:
+
+- Panel completo conectado, con las seis tarjetas y métricas reales.
+- Consola del navegador con recepciones repetidas de `sistema`.
+- Indicador rojo durante la desconexión.
+- Reconexión automática con indicador verde.
+- Respuesta JSON de "/api/sistema" y rutas individuales.
+- Ramas, historial de commits y colaboración en GitHub.
+
+Cuando estén copiadas al repositorio, se podrán insertar así, usando el nombre real de cada archivo:
+
+
+## Pruebas realizadas
+
+| Prueba                         | Resultado observado                                         | Estado  |
+|--------------------------------|-------------------------------------------------------------|---------|
+| Instalar dependencias con pnpm | Instalación completa sin errores.                           | OK |
+| Iniciar Node.js                | Servidor escuchando en el puerto 3000.                      | OK |
+| Abrir el panel desde Express   | Se visualizaron las seis tarjetas.                          | OK |
+| Conectar Socket.IO             | Indicador verde y mensaje de conexión en consola.           | OK |
+| Recibir métricas               | Datos reales en CPU, RAM, SWAP, discos, red y SO.           | OK |
+| Actualizaciones periódicas     | Mensajes "Métricas del servidor recibidas" repetidos en consola. | OK |
+| Detener Node.js                | Indicador rojo y evento de desconexión.                     | OK |
+| Reiniciar Node.js              | Reconexión automática sin recargar Chrome.                  | OK |
+| Consultar  /api/sistema        | Respuesta JSON completa.                                    | OK |
+| Consultar  /api/cpu            | JSON del procesador.                                        | OK |
+| Consultar  /api/memoria        | JSON de RAM y SWAP.                                         | OK |
+| Consultar  /api/discos         | Arreglo JSON de particiones.                                | OK |
+| Consultar  /api/red            | JSON de la interfaz principal.                              | OK |
+| Consultar  /api/so             | JSON del sistema operativo.                                 | OK |
+| Integrar ramas de Git          | Fusión sin conflictos en "integracion-pruebas".             | OK |
+| Publicar integración en GitHub | Rama remota e historial de ambas estudiantes visibles.      | OK |
+
+
+## Problemas conocidos y limitaciones
+
+- La temperatura de CPU puede aparecer como **«No disponible»** si el sistema virtualizado no expone ese sensor.
+- El frontend muestra la interfaz de red principal seleccionada por el backend, no todas las interfaces de la máquina.
+- Si se interrumpe la comunicación, permanecen en pantalla los últimos valores recibidos.
+- El cálculo de uso de SWAP en el frontend se realiza con cifras de GB redondeadas; puede ser aproximado.
+- Actualmente no existe autenticación de usuarios.
+
+## Mejoras futuras y actividades pendientes
+
+- Completar el tablero de GitHub Projects/Kanban y sus evidencias.
+- Preparar y probar la versión móvil solicitada en el trabajo.
+- Configurar y probar el inicio automático del servidor mediante `systemd`.
+- Mejorar la visualización de métricas, agregando fecha/hora de la última actualización y avisos de datos desactualizados.
+- Evaluar seguridad de acceso y restricción de CORS en un despliegue real.
+- Implementar autenticación.
+
+
+## Trabajo colaborativo y autores
+
+| Integrante            | Usuario de GitHub     | Responsabilidad principal                                                      |
+|-----------------------|-----------------------|--------------------------------------------------------------------------------|
+| Garcia Maria Carolina | `carolina-garcia-333` | Backend: Node.js, Express, API REST, Socket.IO y recolección de métricas.      |
+| Leonela Gisel Vazquez | `vazgiselle8-sys`     | Frontend: HTML, CSS, Bootstrap, JavaScript, tarjetas e integración de eventos. |
+
+Ramas de trabajo:
+
+- main: rama principal.
+- rama-backend: desarrollo individual del backend.
+- rama-frontend: desarrollo individual del frontend.
+  
+
+##  Licencia y finalidad educativa
+
+Proyecto desarrollado con fines educativos para un Trabajo Práctico Final Integrador. En el repositorio revisado no se ha incorporado un archivo `LICENSE` que establezca una licencia de distribución para todo el proyecto.
+
+## Conclusión
+
+El TP Final Integrador permitió aplicar de manera conjunta los contenidos de HTML, CSS, Bootstrap, JavaScript, Node.js, objetos JSON, funciones, arreglos, condicionales, ciclos, API REST, Socket.IO, Git y GitHub.
+
+A la hora de la integración fue necesario adaptar los nombres de las propiedades enviadas por el backend, corregir llaves en JavaScript y varias veces comprobar la comunicación entre las partes. Las pruebas de conexión, desconexión, reconexión y consulta HTTP permitieron verificar el comportamiento real de la aplicación.
+
+El resultado es un monitor web que presenta métricas de un servidor Debian 13 y las actualiza automáticamente. 
+
+
 ## Estado
-Proyecto en desarrollo.
+Proyecto FINALIZADO.
 
 
 
