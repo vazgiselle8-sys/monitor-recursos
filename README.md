@@ -23,6 +23,7 @@ El backend obtiene las métricas del servidor donde se esta ejecutando. El front
 -  CSS: Colores, tipografía, bordes y espaciado
 -  JavaScript: Manipulación del DOM, funciones, arreglos, objetos, condicionales y ciclos
 -  Bootstrap 5: Diseño adaptable, tarjetas, alertas y barras de progreso.
+
 #Backend:
 - Node.js: Ejecución del backend en Debian; pnpm: Instalación y administración de dependencias; Express:Servidor HTTP, archivos estáticos y rutas REST; Socket.IO: Envío periódico de métricas al navegador y detección de conexión; cors:Configuración del acceso entre orígenes; y systeminformation: Consulta de CPU, RAM, SWAP, discos, red y sistema operativo.
 - Control de versiones: Git y GitHub: Versionado, ramas, colaboración e integración del código.
